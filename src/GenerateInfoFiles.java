@@ -6,9 +6,9 @@ import java.util.List;
 /**
  * Clase principal para generar la estructura base de archivos.
  */
-public class GenerateInfoFile {
+public class GenerateInfoFiles {
     private static final List<Product> PRODUCTS = new ArrayList<Product>();
-    private static final List<Salesman> SALESMEN = new ArrayList<Salesman>();
+    private static final List<Salesmen> SALESMEN = new ArrayList<Salesmen>();
 
     /**
      * Punto de entrada de la aplicacion.
