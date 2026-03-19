@@ -72,7 +72,7 @@ public class Product {
 	 */
 	public void createProductsFile(int productsCount) {
 
-		String fileName = "products_info.txt";
+		String fileName = Constants.BASE_PATH + java.io.File.separator + "products_info.txt";
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 			for (int i = 1; i <= productsCount; i++) {

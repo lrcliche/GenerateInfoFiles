@@ -88,7 +88,8 @@ public class Salesmen {
 	 * number of salesmen to be generated in the file.
 	 */
 	public void createSalesManInfoFile(int salesmanCount) {
-		String fileName = "salesmen_info.txt";
+		String fileName = Constants.BASE_PATH + java.io.File.separator + "salesmen_info.txt";
+		
 		Random random = new Random();
 
 		/**

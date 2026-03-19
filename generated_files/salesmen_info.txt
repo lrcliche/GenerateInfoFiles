@@ -1,0 +1,5 @@
+CC;1274442466;John;Merchan
+TI;1617446425;Alanis;Gallo
+CC;1076657495;Alanis;Martinez
+TI;1528338971;Ricardo;Perez
+CE;1378592527;Ricardo;Posada
