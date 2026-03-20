@@ -19,6 +19,8 @@ public final class Constants {
     public static final String SALESMEN_FILE = "salesmen_info.txt";
     /** Nombre de la carpeta de ventas. */
     public static final String SALES_FOLDER = "sales";
+    /** Prefijo de los archivos de ventas. */
+    public static final String SALES_FILE_PREFIX = "sale";
 
     /** Cantidad por defecto de productos. */
     public static final int DEFAULT_PRODUCTS_COUNT = 20;

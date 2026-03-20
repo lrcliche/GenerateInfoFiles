@@ -1,14 +1,11 @@
 package src;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Clase principal para generar la estructura base de archivos.
  */
 public class GenerateInfoFiles {
-	private static final List<Product> PRODUCTS = new ArrayList<Product>();
-	private static final List<Salesmen> SALESMEN = new ArrayList<Salesmen>();
 
 	/**
 	 * Punto de entrada de la aplicacion.
@@ -28,7 +25,13 @@ public class GenerateInfoFiles {
 
 			// 3. Generar archivo de información de vendedores
 			Salesmen salesmanTool = new Salesmen("CC", 0, "Default", "Default");
-			salesmanTool.createSalesManInfoFile(Constants.DEFAULT_SALESMEN_COUNT);
+			List<Salesmen> generatedSalesmen = salesmanTool.createSalesManInfoFile(Constants.DEFAULT_SALESMEN_COUNT);
+
+			for (Salesmen salesman : generatedSalesmen) {
+				int randomSalesCount = Constants.DEFAULT_MIN_SALES
+						+ (int) (Math.random() * (Constants.DEFAULT_MAX_SALES - Constants.DEFAULT_MIN_SALES + 1));
+				salesman.createSalesMenFile(randomSalesCount, salesman.getFullName(), salesman.getDocumentNumber());
+			}
 
 			System.out.println("Archivos generados correctamente en la carpeta: " + Constants.BASE_PATH);
 		} catch (Exception e) {

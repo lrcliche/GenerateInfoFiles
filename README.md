@@ -1,29 +1,59 @@
 # GenerateInfoFiles
 
-Proyecto en Java para generar la estructura base de carpetas de archivos de informacion.
+Proyecto en Java para generar archivos de informacion de productos, vendedores y ventas.
 
-Actualmente el programa crea una carpeta principal y una subcarpeta para ventas. El proyecto tambien incluye entidades simples como `Product` y `Salesman`, junto con una clase de constantes y una utilidad para manejo de directorios.
+## Que genera
 
-## Objetivo
+Al ejecutar el programa se crean, si no existen, estas rutas:
 
-Este proyecto sirve como base para un generador de archivos de informacion. Por ahora, la funcionalidad implementada se enfoca en crear la estructura inicial de carpetas donde se podrian almacenar productos, vendedores y ventas.
+```text
+generated_files/
+generated_files/products_info.txt
+generated_files/salesmen_info.txt
+generated_files/sales/
+generated_files/sales/ventas_<documento>.txt
+```
+
+## Formatos
+
+Archivo de productos `generated_files/products_info.txt`:
+
+```text
+IDProducto;NombreProducto;PrecioPorUnidad
+```
+
+Archivo de vendedores `generated_files/salesmen_info.txt`:
+
+```text
+TipoDocumento;NumeroDocumento;Nombres;Apellidos
+```
+
+Archivo de ventas por vendedor `generated_files/sales/ventas_<documento>.txt`:
+
+```text
+TipoDocumento;NumeroDocumento
+IDProducto;Cantidad
+IDProducto;Cantidad
+```
+
+La primera linea identifica al vendedor y las siguientes lineas representan sus ventas.
 
 ## Estructura del proyecto
 
-- `src/GenerateInfoFile.java`: clase principal con el metodo `main`.
-- `src/FileUtil.java`: utilidades para crear directorios base.
-- `src/Constants.java`: constantes generales del proyecto.
-- `src/Product.java`: entidad que representa un producto.
-- `src/Salesman.java`: entidad que representa un vendedor.
+- `src/GenerateInfoFiles.java`: clase principal con el metodo `main`.
+- `src/FileUtil.java`: crea la estructura base de carpetas.
+- `src/Constants.java`: constantes de rutas, nombres de archivos y cantidades por defecto.
+- `src/Product.java`: genera el archivo de productos.
+- `src/Salesmen.java`: genera el archivo de vendedores y los archivos de ventas por vendedor.
+- `src/TestValidator.java`: validacion basica de formato para los archivos principales.
 
 ## Requisitos
 
 - Java JDK 8 o superior.
-- Consola o terminal para compilar y ejecutar el proyecto.
 
 ## Compilacion
 
-Desde la raiz del proyecto, ejecuta:
+Desde la raiz del proyecto:
 
 ```bash
 javac src/*.java
@@ -31,24 +61,17 @@ javac src/*.java
 
 ## Ejecucion
 
-Despues de compilar, ejecuta:
+Despues de compilar:
 
 ```bash
-java src.GenerateInfoFile
+java src.GenerateInfoFiles
 ```
 
-## Resultado esperado
+## Flujo de ejecucion
 
-Al ejecutar el programa se crea la siguiente estructura si no existe:
+La ejecucion principal hace este proceso:
 
-```text
-generated_files/
-generated_files/sales/
-```
-
-En consola deberia mostrarse un mensaje indicando que el proceso fue ejecutado correctamente o, en caso de error, el detalle de la excepcion.
-
-## Notas
-
-- Las constantes de nombres de archivos y cantidades por defecto ya estan definidas en `Constants`, aunque en este momento no todas se usan en la ejecucion principal.
-- El proyecto puede extenderse para generar archivos de productos, vendedores y ventas con informacion de prueba.
+1. Crea la carpeta `generated_files` y la subcarpeta `generated_files/sales`.
+2. Genera `products_info.txt`.
+3. Genera `salesmen_info.txt`.
+4. Genera un archivo de ventas por cada vendedor dentro de `generated_files/sales`.

@@ -3,6 +3,8 @@ package src;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -76,51 +78,35 @@ public class Salesmen {
 	}
 
 	/**
-	 * Entity representing a salesman and utilities to generate random salesman data
-	 * files. This class ensures data consistency as required by the academic
-	 * project guidelines.
+	 * Genera el archivo plano de vendedores y retorna la lista generada para poder
+	 * crear luego los archivos de ventas.
+	 *
+	 * @param salesmanCount cantidad de vendedores a generar
+	 * @return lista de vendedores generados
 	 */
-
-	/**
-	 * Creates a file with pseudo-random information for a specified number of
-	 * salesmen. The format of each line is:
-	 * DocumentType;DocumentNumber;FirstNames;LastNames. * @param salesmanCount The
-	 * number of salesmen to be generated in the file.
-	 */
-	public void createSalesManInfoFile(int salesmanCount) {
-		String fileName = Constants.BASE_PATH + java.io.File.separator + "salesmen_info.txt";
-		
+	public List<Salesmen> createSalesManInfoFile(int salesmanCount) {
+		String fileName = Constants.BASE_PATH + java.io.File.separator + Constants.SALESMEN_FILE;
 		Random random = new Random();
+		List<Salesmen> generatedSalesmen = new ArrayList<Salesmen>();
 
-		/**
-		 * Listas de nombres y apellidos reales para cumplir con la "coherencia" pedida
-		 * 
-		 */
-		String[] firstNames = { "Andres", "Alanis", "John", "Andres", "Carolina", "Jose", "Maria", "Luis", "Fernanda",
-				"Ricardo" };
+		String[] firstNames = { "Andres", "Alanis", "John", "Carolina", "Jose", "Maria", "Luis", "Fernanda",
+				"Ricardo", "Laura" };
 		String[] lastNames = { "Posada", "Gallo", "Merchan", "Valencia", "Leon", "Gomez", "Rodriguez", "Lopez",
 				"Martinez", "Perez" };
 		String[] docTypes = { "CC", "CE", "TI" };
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 			for (int i = 0; i < salesmanCount; i++) {
-				String type = docTypes[random.nextInt(docTypes.length)];
-				long document = 1000000000L + random.nextInt(900000000);
-				String name = firstNames[random.nextInt(firstNames.length)];
-				String lastName = lastNames[random.nextInt(lastNames.length)];
+				Salesmen salesman = new Salesmen(docTypes[random.nextInt(docTypes.length)],
+						1000000000L + random.nextInt(900000000), firstNames[random.nextInt(firstNames.length)],
+						lastNames[random.nextInt(lastNames.length)]);
 
-				/**
-				 * Formato requerido: Tipo Documento; Número Documento; Nombres; Apellidos
-				 * 
-				 */
-				String line = type + ";" + document + ";" + name + ";" + lastName;
-
-				writer.write(line);
+				generatedSalesmen.add(salesman);
+				writer.write(salesman.getDocumentType() + ";" + salesman.getDocumentNumber() + ";"
+						+ salesman.getFirstName() + ";" + salesman.getLastName());
 				writer.newLine();
 			}
-			/**
-			 * Mensaje de éxito obligatorio [cite: 58]
-			 */
+
 			System.out.println(
 					"Process completed successfully: '" + fileName + "' generated with " + salesmanCount + " records.");
 
@@ -130,6 +116,41 @@ public class Salesmen {
 			 * 
 			 */
 			System.err.println("An error occurred while creating the salesmen info file: " + e.getMessage());
+		}
+
+		return generatedSalesmen;
+	}
+
+	/**
+	 * Genera el archivo de ventas de un vendedor.
+	 *
+	 * Primera linea:
+	 * TipoDocumento;NumeroDocumento
+	 *
+	 * Siguientes lineas:
+	 * IDProducto;Cantidad
+	 *
+	 * @param randomSalesCount cantidad de ventas a generar
+	 * @param name             nombre de referencia del vendedor
+	 * @param id               documento del vendedor
+	 * @throws IOException si ocurre un error de escritura
+	 */
+	public void createSalesMenFile(int randomSalesCount, String name, long id) throws IOException {
+		String fileName = Constants.BASE_PATH + java.io.File.separator + Constants.SALES_FOLDER
+				+ java.io.File.separator + Constants.SALES_FILE_PREFIX + id + ".txt";
+		Random random = new Random();
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+			writer.write(getDocumentType() + ";" + id);
+			writer.newLine();
+
+			for (int i = 0; i < randomSalesCount; i++) {
+				int productId = random.nextInt(Constants.DEFAULT_PRODUCTS_COUNT) + 1;
+				int quantity = random.nextInt(20) + 1;
+
+				writer.write(productId + ";" + quantity);
+				writer.newLine();
+			}
 		}
 	}
 }
