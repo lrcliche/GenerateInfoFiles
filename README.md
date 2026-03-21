@@ -1,77 +1,42 @@
-# GenerateInfoFiles
+# Generación y Procesamiento de Archivos Pseudoaleatorios
 
-Proyecto en Java para generar archivos de informacion de productos, vendedores y ventas.
+# Conceptos Fundamentales de Programación B03
+  SubGrupo 5
+# Autores
+Miguel Ángel Agudelo Ospina
 
-## Que genera
+Luis Ramos Quesada
 
-Al ejecutar el programa se crean, si no existen, estas rutas:
+Andrés Felipe Posada Valencia 
 
-```text
-generated_files/
-generated_files/products_info.txt
-generated_files/salesmen_info.txt
-generated_files/sales/
-generated_files/sales/ventas_<documento>.txt
-```
+Jennyfer Parra Ramírez 
 
-## Formatos
+# Descripción
 
-Archivo de productos `generated_files/products_info.txt`:
+Este proyecto académico en Java genera archivos planos con datos pseudoaleatorios de productos, vendedores y ventas. Posteriormente, dichos archivos pueden validarse y procesarse como base para la elaboración de reportes solicitados en la actividad.
 
-```text
-IDProducto;NombreProducto;PrecioPorUnidad
-```
+# Estructura del Proyecto
 
-Archivo de vendedores `generated_files/salesmen_info.txt`:
+* `GenerateInfoFiles`:
+  Genera archivos planos con datos pseudoaleatorios y crea la estructura base de carpetas y archivos que sirven como entrada del proceso.
 
-```text
-TipoDocumento;NumeroDocumento;Nombres;Apellidos
-```
+* `main`:
+  En la estructura solicitada por la actividad, esta clase corresponde al programa encargado de procesar los archivos generados y producir los reportes.
 
-Archivo de ventas por vendedor `generated_files/sales/ventas_<documento>.txt`:
+Nota: en esta versión del repositorio, la clase ejecutable identificada para la generación es `GenerateInfoFiles` y también se incluye `TestValidator` para validar el formato de los archivos.
 
-```text
-TipoDocumento;NumeroDocumento
-IDProducto;Cantidad
-IDProducto;Cantidad
-```
+# Cómo ejecutar el proyecto
 
-La primera linea identifica al vendedor y las siguientes lineas representan sus ventas.
+1. Ejecutar la clase `GenerateInfoFiles`.
+2. Verificar que los archivos se hayan creado en la carpeta `generated_files`.
+3. Ejecutar la clase de procesamiento o validación disponible en el proyecto.
+4. Revisar los resultados generados o los mensajes mostrados en consola.
 
-## Estructura del proyecto
+#Resultado esperado
 
-- `src/GenerateInfoFiles.java`: clase principal con el metodo `main`.
-- `src/FileUtil.java`: crea la estructura base de carpetas.
-- `src/Constants.java`: constantes de rutas, nombres de archivos y cantidades por defecto.
-- `src/Product.java`: genera el archivo de productos.
-- `src/Salesmen.java`: genera el archivo de vendedores y los archivos de ventas por vendedor.
-- `src/TestValidator.java`: validacion basica de formato para los archivos principales.
+Al finalizar la ejecución, el programa debe mostrar un mensaje de éxito cuando el proceso se completa correctamente. Si ocurre algún problema, debe mostrar un mensaje de error indicando la falla.
 
-## Requisitos
+#Requisitos
 
-- Java JDK 8 o superior.
-
-## Compilacion
-
-Desde la raiz del proyecto:
-
-```bash
-javac src/*.java
-```
-
-## Ejecucion
-
-Despues de compilar:
-
-```bash
-java src.GenerateInfoFiles
-```
-
-## Flujo de ejecucion
-
-La ejecucion principal hace este proceso:
-
-1. Crea la carpeta `generated_files` y la subcarpeta `generated_files/sales`.
-2. Genera `products_info.txt`.
-3. Genera `salesmen_info.txt`.
-4. Genera un archivo de ventas por cada vendedor dentro de `generated_files/sales`.
+* Java JDK 8 o superior
+* Eclipse IDE o cualquier entorno similar para proyectos Java
