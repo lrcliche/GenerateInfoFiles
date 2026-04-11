@@ -1,13 +1,13 @@
 package src;
 
 /**
- * Contiene las constantes generales del proyecto.
+ * Constantes generales del proyecto.
  */
 public final class Constants {
 
-    /**
-     * Constructor privado para evitar instancias.
-     */
+	/**
+	 * Constructor privado para evitar instancias.
+	 */
     private Constants() {
     }
 
@@ -22,12 +22,13 @@ public final class Constants {
     /** Prefijo de los archivos de ventas. */
     public static final String SALES_FILE_PREFIX = "sale";
 
-    /** Cantidad por defecto de productos. */
+    public static final String SALESMEN_REPORT_CSV = "salesmen_report.csv";
+    public static final String PRODUCTS_REPORT_CSV = "products_report.csv";
+    public static final String ERRORS_FILE = "errors.txt";
+    public static final String CONCLUSION_FILE = "conclusion.txt";
+
     public static final int DEFAULT_PRODUCTS_COUNT = 20;
-    /** Cantidad por defecto de vendedores. */
     public static final int DEFAULT_SALESMEN_COUNT = 5;
-    /** Cantidad minima de ventas. */
     public static final int DEFAULT_MIN_SALES = 5;
-    /** Cantidad maxima de ventas. */
     public static final int DEFAULT_MAX_SALES = 15;
 }

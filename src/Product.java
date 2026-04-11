@@ -12,7 +12,15 @@ public class Product {
 	private String id;
 	private String name;
 	private double price;
+	private int totalQuantitySold = 0;
 
+	/**
+	 * Crea un producto con su informacion basica.
+	 *
+	 * @param id id del producto
+	 * @param name nombre del producto
+	 * @param price precio por unidad
+	 */
 	public Product(String id, String name, double price) {
 		this.id = id;
 		this.name = name;
@@ -32,8 +40,26 @@ public class Product {
 	}
 
 	/**
+	 * Obtiene la cantidad total vendida (acumulada).
+	 *
+	 * @return cantidad total vendida
+	 */
+	public int getTotalQuantitySold() {
+		return totalQuantitySold;
+	}
+
+	/**
+	 * Acumula cantidad vendida.
+	 *
+	 * @param qty cantidad a sumar
+	 */
+	public void addQuantitySold(int qty) {
+		this.totalQuantitySold += qty;
+	}
+
+	/**
 	 * Genera el archivo de productos con formato:
-	 * IDProducto;NombreProducto;PrecioPorUnidad
+	 * {@code IDProducto;NombreProducto;PrecioPorUnidad}
 	 *
 	 * @param productsCount cantidad de productos a generar
 	 */

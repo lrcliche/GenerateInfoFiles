@@ -7,14 +7,17 @@ import java.io.File;
  */
 public final class FileUtil {
 
-    /**
-     * Constructor privado para evitar instancias.
-     */
+	/**
+	 * Constructor privado para evitar instancias.
+	 */
     private FileUtil() {
     }
 
     /**
      * Crea las carpetas base del proceso si no existen.
+     * <p>
+     * - {@code generated_files}
+     * - {@code generated_files/sales}
      */
     public static void createBaseDirectories() {
         File baseDirectory = new File(Constants.BASE_PATH);
