@@ -14,6 +14,12 @@ import java.util.Map;
 
 public class Main {
 
+    private static final String BASE_PATH = "generated_files";
+    private static final String PRODUCTS_FILE = "products.txt";
+    private static final String SALESMEN_FILE = "salesmen_info.txt";
+    private static final String SALES_FOLDER = "sales";
+    private static final String SALES_FILE_PREFIX = "sale";
+    
     private static Map<Integer, Product> productMap = new HashMap<>();
     private static Map<Long, SalesmenData> salesmanMap = new HashMap<>();
 
@@ -27,7 +33,8 @@ public class Main {
     }
 
     private static void processReports() throws IOException {
-        FileUtil.createBaseDirectories();
+        new File(BASE_PATH).mkdirs();
+        new File(BASE_PATH + File.separator + SALES_FOLDER).mkdirs();
         
         loadProducts();
         loadSalesmen();
@@ -38,7 +45,7 @@ public class Main {
     }
 
     private static void loadProducts() throws IOException {
-        File file = new File(Constants.BASE_PATH + File.separator + Constants.PRODUCTS_FILE);
+        File file = new File(BASE_PATH + File.separator + PRODUCTS_FILE);
         
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -47,7 +54,7 @@ public class Main {
                 if (data.length >= 3) {
                     int id = Integer.parseInt(data[0].trim());
                     String name = data[1].trim();
-                    double price = Double.parseDouble(data[2].trim());
+                    double price = Double.parseDouble(data[2].trim().replace(',', '.'));
                     
                     productMap.put(id, new Product(id, name, price));
                 }
@@ -56,7 +63,7 @@ public class Main {
     }
 
     private static void loadSalesmen() throws IOException {
-        File file = new File(Constants.BASE_PATH + File.separator + Constants.SALESMEN_FILE);
+        File file = new File(BASE_PATH + File.separator + SALESMEN_FILE);
         
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -75,14 +82,14 @@ public class Main {
     }
 
     private static void searchAndProcessSalesFiles() throws IOException {
-        File folder = new File(Constants.BASE_PATH + File.separator + Constants.SALES_FOLDER);
+        File folder = new File(BASE_PATH + File.separator + SALES_FOLDER);
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles == null) return;
 
         for (File file : listOfFiles) {
             if (file.isFile() && file.getName().endsWith(".txt") 
-                && file.getName().startsWith(Constants.SALES_FILE_PREFIX)) {
+                && file.getName().startsWith(SALES_FILE_PREFIX)) {
                 processSingleSalesFile(file);
             }
         }
@@ -123,7 +130,7 @@ public class Main {
         
         salesmenList.sort(Comparator.comparingDouble(SalesmenData::getTotalCollected).reversed());
 
-        String fileName = Constants.BASE_PATH + File.separator + "salesmen_info.txt";
+        String fileName = BASE_PATH + File.separator + "salesmen_report.txt";
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (SalesmenData salesman : salesmenList) {
@@ -139,7 +146,7 @@ public class Main {
         
         productList.sort(Comparator.comparingInt(Product::getTotalQuantitySold).reversed());
 
-        String fileName = Constants.BASE_PATH + File.separator + "products_info.txt";
+        String fileName = BASE_PATH + File.separator + "products_report.txt";
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Product product : productList) {
