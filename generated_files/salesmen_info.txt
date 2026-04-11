@@ -1,5 +1,5 @@
-CC;1699389477;Fernanda;Merchan
-CE;1884087764;Andres;Martinez
-CC;1849015787;Andres;Lopez
-TI;1856347194;Luis;Merchan
-CC;1179220190;Andres;Martinez
+Luis_Merchan;8949.779999999999
+Andres_Martinez;8614.16
+Andres_Lopez;7751.77
+Fernanda_Merchan;4922.92
+Andres_Martinez;3569.3500000000004
