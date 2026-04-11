@@ -9,6 +9,10 @@ import java.util.Random;
 
 /**
  * Representa un vendedor del sistema.
+ * <p>
+ * Se usa para generar:
+ * - {@code salesmen_info.txt}
+ * - Archivos de ventas por vendedor en {@code generated_files/sales}
  */
 public class Salesmen {
 
@@ -42,7 +46,7 @@ public class Salesmen {
 	}
 
 	/**
-	 * Obtiene el numero de documento.
+	 * Obtiene el numero de documento del vendedor.
 	 *
 	 * @return numero de documento
 	 */
@@ -69,9 +73,9 @@ public class Salesmen {
 	}
 
 	/**
-	 * Obtiene el nombre completo en un solo texto.
+	 * Obtiene el nombre completo en formato {@code Nombre_Apellido}.
 	 *
-	 * @return nombre completo del vendedor
+	 * @return nombre completo
 	 */
 	public String getFullName() {
 		return firstName + "_" + lastName;
