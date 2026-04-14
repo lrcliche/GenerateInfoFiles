@@ -26,7 +26,7 @@ public class Main {
         generateProductReport();
     }
 
-    // ✅ Cargar productos
+    // Cargar productos
     public static void loadProducts(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         String line;
@@ -42,7 +42,7 @@ public class Main {
         br.close();
     }
 
-    //  Cargar vendedores
+    // Cargar vendedores
     public static void loadVendedores(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         String line;
@@ -58,7 +58,7 @@ public class Main {
         br.close();
     }
 
-    //  Procesar carpeta de ventas
+    // Procesar carpeta de ventas
     public static void processSalesFolder(String folderName) throws IOException {
         File folder = new File(folderName);
         File[] files = folder.listFiles();
@@ -70,7 +70,7 @@ public class Main {
         }
     }
 
-    //  Procesar archivo individual de ventas
+    // Procesar archivo individual de ventas
     public static void processSalesFile(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
@@ -103,7 +103,7 @@ public class Main {
         br.close();
     }
 
-    //  Reporte de vendedores
+    // Reporte de vendedores
     public static void generateSalesmanReport() throws IOException {
         List<Map.Entry<String, Double>> lista = new ArrayList<>(ventasPorVendedor.entrySet());
 
@@ -123,7 +123,7 @@ public class Main {
         bw.close();
     }
 
-    //  Reporte de productos
+    // Reporte de productos
     public static void generateProductReport() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_productos.txt"));
 
