@@ -1,1 +1,145 @@
+import java.io.*;
+import java.util.*;
 
+public class Main {
+
+    private static Map<String, Double> productos = new HashMap<>();
+    private static Map<String, String> vendedores = new HashMap<>();
+    private static Map<String, Double> ventasPorVendedor = new HashMap<>();
+    private static Map<String, Integer> ventasPorProducto = new HashMap<>();
+
+    public static void main(String[] args) {
+        try {
+            processReports();
+            System.out.println("Reportes generados con éxito");
+        } catch (Exception e) {
+            System.out.println("Error en la ejecución: " + e.getMessage());
+        }
+    }
+
+    public static void processReports() throws IOException {
+        loadProducts("productos.txt");
+        loadVendedores("vendedores.txt");
+        processSalesFolder("ventas");
+
+        generateSalesmanReport();
+        generateProductReport();
+    }
+
+    // Cargar productos
+    public static void loadProducts(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(";");
+            String id = parts[0];
+            double precio = Double.parseDouble(parts[2]);
+
+            productos.put(id, precio);
+        }
+
+        br.close();
+    }
+
+    // Cargar vendedores
+    public static void loadVendedores(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(";");
+            String id = parts[1];
+            String nombreCompleto = parts[2] + " " + parts[3];
+
+            vendedores.put(id, nombreCompleto);
+        }
+
+        br.close();
+    }
+
+    // Procesar carpeta de ventas
+    public static void processSalesFolder(String folderName) throws IOException {
+        File folder = new File(folderName);
+        File[] files = folder.listFiles();
+
+        if (files == null) return;
+
+        for (File file : files) {
+            processSalesFile(file);
+        }
+    }
+
+    // Procesar archivo individual de ventas
+    public static void processSalesFile(File file) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+
+        // Primera línea → vendedor
+        line = br.readLine();
+        if (line == null) return;
+
+        String[] vendedorInfo = line.split(";");
+        String vendedorId = vendedorInfo[1];
+
+        double totalVendedor = 0;
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(";");
+
+            if (parts.length < 2) continue;
+
+            String productoId = parts[0];
+            int cantidad = Integer.parseInt(parts[1]);
+
+            Double precio = productos.get(productoId);
+            if (precio == null) continue;
+
+            double total = precio * cantidad;
+            totalVendedor += total;
+
+            ventasPorProducto.put(productoId,
+                    ventasPorProducto.getOrDefault(productoId, 0) + cantidad);
+        }
+
+        ventasPorVendedor.put(vendedorId,
+                ventasPorVendedor.getOrDefault(vendedorId, 0.0) + totalVendedor);
+
+        br.close();
+    }
+
+    // Reporte de vendedores
+    public static void generateSalesmanReport() throws IOException {
+        List<Map.Entry<String, Double>> lista = new ArrayList<>(ventasPorVendedor.entrySet());
+
+        lista.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_vendedores.txt"));
+
+        for (Map.Entry<String, Double> entry : lista) {
+            String id = entry.getKey();
+            String nombre = vendedores.getOrDefault(id, "Desconocido");
+            double total = entry.getValue();
+
+            bw.write(nombre + ";" + total);
+            bw.newLine();
+        }
+
+        bw.close();
+    }
+
+    // Reporte de productos
+    public static void generateProductReport() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_productos.txt"));
+
+        for (Map.Entry<String, Integer> entry : ventasPorProducto.entrySet()) {
+            String productoId = entry.getKey();
+            int cantidad = entry.getValue();
+
+            bw.write(productoId + ";" + cantidad);
+            bw.newLine();
+        }
+
+        bw.close();
+    }
+}
