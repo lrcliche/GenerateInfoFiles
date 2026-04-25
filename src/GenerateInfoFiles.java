@@ -366,12 +366,13 @@ public final class GenerateInfoFiles {
 	}
 
 	/**
-	 * Genera {@code conclusion.txt} desde el archivo base {@code Conclucion.txt}.
+	 * Genera {@code conclusion.txt} desde el archivo base {@code ConclusionFinal.txt}.
 	 *
 	 * @throws IOException si falla la escritura
 	 */
 	private static void writeConclusions() throws IOException {
 		String content = readConclusionContent();
+		writeTextFile(Constants.CONCLUSION_ROOT_FILE, content);
 		writeTextFile(Constants.BASE_PATH + File.separator + Constants.CONCLUSION_FILE, content);
 	}
 
@@ -383,9 +384,6 @@ public final class GenerateInfoFiles {
 	 */
 	private static String readConclusionContent() throws IOException {
 		File sourceFile = new File(Constants.CONCLUSION_SOURCE_FILE);
-		if (!sourceFile.exists()) {
-			sourceFile = new File("Conclusion.txt");
-		}
 
 		if (sourceFile.exists()) {
 			return new String(Files.readAllBytes(sourceFile.toPath()), StandardCharsets.UTF_8);
