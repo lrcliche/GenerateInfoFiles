@@ -1,7 +1,8 @@
 ===========================================================
 REPORTE DE CONCLUSIONES - PROYECTO GRUPAL 
 Módulo: Conceptos Fundamentales de Programación
-Estudiante: Andrés Felipe Posada Valencia
+Estudiantes: Andrés Felipe Posada Valencia
+             Luis Alberto Ramos Quesada
 Conclusión de proyecto GenerateInfoFiles
 ===========================================================
 

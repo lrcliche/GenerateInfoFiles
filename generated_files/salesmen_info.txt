@@ -1,5 +1,5 @@
-TI;1295643653;Laura;Gomez
-CC;1552996059;Carolina;Rodriguez
-CE;1190275717;Andres;Lopez
-TI;1802115038;Carolina;Posada
-CE;1405245471;Andres;Gallo
+CE;1355495437;Andres;Valencia
+TI;1607965555;Laura;Valencia
+TI;1357931193;Laura;Merchan
+TI;1877475380;Laura;Leon
+CE;1100424557;Fernanda;Perez

@@ -1,15 +1,16 @@
-Cambios
-# Cambios semana 5
+===========================================================
+REPORTE DE CONCLUSIONES - PROYECTO GRUPAL 
+Módulo: Conceptos Fundamentales de Programación
+Estudiantes: Andrés Felipe Posada Valencia
+             Luis Alberto Ramos Quesada
+Conclusión de proyecto GenerateInfoFiles
+===========================================================
 
-Que se aprendio:
-- A leer y procesar archivos de texto linea por linea sin asumir que todo viene perfecto.
-- A validar datos antes de usarlos para evitar reportes incorrectos.
-- A centralizar constantes y utilidades para que el codigo sea mas facil de mantener.
+1. LO APRENDIDO DURANTE EL DESARROLLO DEL PROYECTO
+Durante este proceso, logré consolidar el uso de la Programación Orientada a Objetos (POO) en Java 8,en la gestión de datos masivos. Aprendí a utilizar estructuras de datos avanzadas como HashMap para optimizar búsquedas y procesar archivos planos (CSV) de forma automática. También fortalecí mis habilidades en la automatización de procesos, pasando de la generación de datos pseudoaleatorios a la consolidación de reportes de ventas complejos sin intervención del usuario.
 
-Dificultades:
-- Manejar errores sin frenar todo el programa y al mismo tiempo dejar registro en consola y archivo.
-- Definir validaciones claras para lineas mal formadas, productos inexistentes y cantidades/precios invalidos.
+2. POSIBLES APLICACIONES PROFESIONALES
+Como futuros Ingenieros de Software, las destrezas adquiridas en el manejo de archivos I/O (entrada/salida) y la generación de reportes automáticos son fundamentales para el desarrollo de sistemas ERP, software de facturación o herramientas de análisis de datos. La capacidad de estructurar un código bajo estándares de documentación (JavaDoc) y buenas prácticas de nombramiento me prepara para trabajar en entornos de desarrollo profesionales y colaborativos.
 
-Uso profesional:
-- Estas validaciones ayudan a detectar problemas de calidad de datos y a auditar procesos.
-- Un archivo de errores facilita soporte, trazabilidad y correccion rapida.
+3. DIFICULTADES PRESENTADAS
+La principal dificultad fue la orquestación del flujo de datos: asegurar que los archivos generados por la clase 'GenerateInfoFiles' fueran leídos y procesados correctamente por la clase 'main'; Además, el reto de implementar algoritmos de ordenamiento descendente (de mayor a menor) para los reportes finales requirió un estudio profundo sobre las colecciones en Java y el manejo de excepciones para garantizar que el programa no falle ante archivos con formatos inconsistentes.

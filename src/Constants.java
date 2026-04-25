@@ -25,6 +25,7 @@ public final class Constants {
     public static final String SALESMEN_REPORT_CSV = "salesmen_report.csv";
     public static final String PRODUCTS_REPORT_CSV = "products_report.csv";
     public static final String ERRORS_FILE = "errors.txt";
+    public static final String CONCLUSION_SOURCE_FILE = "Conclucion.txt";
     public static final String CONCLUSION_FILE = "conclusion.txt";
 
     public static final int DEFAULT_PRODUCTS_COUNT = 20;
