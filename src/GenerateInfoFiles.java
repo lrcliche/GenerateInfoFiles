@@ -3,9 +3,13 @@ package src;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -362,13 +366,32 @@ public final class GenerateInfoFiles {
 	}
 
 	/**
-	 * Genera {@code conclusion.txt} y {@code conslusion.txt}.
+	 * Genera {@code conclusion.txt} desde el archivo base {@code Conclucion.txt}.
 	 *
 	 * @throws IOException si falla la escritura
 	 */
 	private static void writeConclusions() throws IOException {
-		String content = buildConclusionContent();
+		String content = readConclusionContent();
 		writeTextFile(Constants.BASE_PATH + File.separator + Constants.CONCLUSION_FILE, content);
+	}
+
+	/**
+	 * Lee el contenido base de conclusiÃ³n desde la raÃ­z del proyecto.
+	 *
+	 * @return texto de conclusiÃ³n
+	 * @throws IOException si falla la lectura
+	 */
+	private static String readConclusionContent() throws IOException {
+		File sourceFile = new File(Constants.CONCLUSION_SOURCE_FILE);
+		if (!sourceFile.exists()) {
+			sourceFile = new File("Conclusion.txt");
+		}
+
+		if (sourceFile.exists()) {
+			return new String(Files.readAllBytes(sourceFile.toPath()), StandardCharsets.UTF_8);
+		}
+
+		return buildConclusionContent();
 	}
 
 	/**
@@ -405,7 +428,8 @@ public final class GenerateInfoFiles {
 	 * @throws IOException si falla la escritura
 	 */
 	private static void writeTextFile(String path, String content) throws IOException {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+		try (BufferedWriter writer = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8))) {
 			writer.write(content);
 		}
 	}
