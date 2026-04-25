@@ -1,0 +1,15 @@
+Cambios
+# Cambios semana 5
+
+Que se aprendio:
+- A leer y procesar archivos de texto linea por linea sin asumir que todo viene perfecto.
+- A validar datos antes de usarlos para evitar reportes incorrectos.
+- A centralizar constantes y utilidades para que el codigo sea mas facil de mantener.
+
+Dificultades:
+- Manejar errores sin frenar todo el programa y al mismo tiempo dejar registro en consola y archivo.
+- Definir validaciones claras para lineas mal formadas, productos inexistentes y cantidades/precios invalidos.
+
+Uso profesional:
+- Estas validaciones ayudan a detectar problemas de calidad de datos y a auditar procesos.
+- Un archivo de errores facilita soporte, trazabilidad y correccion rapida.
